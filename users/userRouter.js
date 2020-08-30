@@ -1,47 +1,25 @@
+const AppError = require('../utils/appError')
 const express = require('express');
-
+const userController = require('./userController')
 const router = express.Router();
+const db = require('./userDb')
+const { validateUserId, validateUser, validatePost } = require('./userMiddleware')
 
-router.post('/', (req, res) => {
-  // do your magic!
-});
+router
+  .route('/')
+  .post(validateUser, userController.postUser)
+  .get(userController.getAllUsers)
 
-router.post('/:id/posts', (req, res) => {
-  // do your magic!
-});
+router
+  .route('/:id')
+  .get(validateUserId, userController.getUser)
+  .patch(validateUserId, validateUser, userController.updateUser)
+  .delete(validateUserId, userController.deleteUser)
 
-router.get('/', (req, res) => {
-  // do your magic!
-});
+router
+  .route('/:id/posts')
+  .post(validateUserId, validatePost, userController.createPost)
+  .get(validateUserId, userController.getUsersPost)
 
-router.get('/:id', (req, res) => {
-  // do your magic!
-});
-
-router.get('/:id/posts', (req, res) => {
-  // do your magic!
-});
-
-router.delete('/:id', (req, res) => {
-  // do your magic!
-});
-
-router.put('/:id', (req, res) => {
-  // do your magic!
-});
-
-//custom middleware
-
-function validateUserId(req, res, next) {
-  // do your magic!
-}
-
-function validateUser(req, res, next) {
-  // do your magic!
-}
-
-function validatePost(req, res, next) {
-  // do your magic!
-}
 
 module.exports = router;

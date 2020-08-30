@@ -1,13 +1,10 @@
 const express = require('express');
-
-const server = express();
-
-server.get('/', (req, res) => {
-  res.send(`<h2>Let's write some middleware!</h2>`);
-});
+const app = require('./app');
+const PORT = 1337
 
 //custom middleware
 
-function logger(req, res, next) {}
 
-module.exports = server;
+app.listen(PORT, () => {
+  console.log(`server is listening on port ${PORT}`)
+})
