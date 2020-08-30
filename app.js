@@ -14,6 +14,13 @@ app.use(express.json())
 app.use(logger)
 
 // ROUTES
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 200,
+        api: 'up',
+        message: "Welcome"
+    })
+})
 app.use('/api/users', userRouter)
 
 
