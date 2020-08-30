@@ -1,6 +1,10 @@
+const dotenv = require('dotenv')
+
+dotenv.config({ path: './config.env' })
+
 const express = require('express');
 const app = require('./app');
-const PORT = 1337
+const PORT = process.env.PORT || 3000
 
 //custom middleware
 
